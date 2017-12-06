@@ -1,0 +1,53 @@
+<!-- index.html-->
+
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+<div class="jumbotron">
+  <h1>PaPirus Text</h1>
+  <p class="lead">
+	<table>
+	<tr><td><label>Line 1</label></td><td><input type="text" id="Line1" value=""/></td></tr>
+	<tr><td><label>Line 2</label></td><td><input type="text" id="Line2" value=""/></td></tr>
+	<tr><td><label>Line 3</label></td><td><input type="text" id="Line3" value=""/></td></tr>
+	<tr><td><label>Line 4</label></td><td><input type="text" id="Line4" value=""/></td></tr>
+	<tr><td><label>Line 5</label></td><td><input type="text" id="Line5" value=""/></td></tr>
+	<tr><td><label>Line 6</label></td><td><input type="text" id="Line6" value=""/></td></tr>
+	<tr><td><label>Line 7</label></td><td><input type="text" id="Line7" value=""/></td></tr>
+	<tr><td><label>Line 8</label></td><td><input type="text" id="Line8" value=""/></td></tr>
+	<tr><td><label>Line 9</label></td><td><input type="text" id="Line9" value=""/></td></tr>
+	</table>
+	<input type="button" value="Update" onclick="updateText();" />
+  </p>
+</div>
+<script type=text/javascript src="{{
+  url_for('static', filename='jquery.min.js') }}"></script>
+<script type=text/javascript>
+function updateText(){
+  var lines=[],
+   line="";
+  for(i=0;i<9;i++){
+    line=$("#Line"+(i+1).toString())[0]
+	  lines[i] = line.value;
+	  $.get("/"+(i+1).toString()+"/"+lines[i],function(data) {
+	  
+	  });
+  }
+    setTimeout(function(){ 
+  	  $.get("/commit",function(data) {
+  	  
+  	  });
+    }, 3000);  
+}
+  
+window.onload = function () {
+  var line=""
+  $.get("/status",function(data) {
+	for(i=0;i<9;i++){
+    line=$("#Line"+(i+1).toString())[0]
+	  line.value=data.data[i];
+	}
+  });
+};
+</script>
+{% endblock %}
