@@ -22,6 +22,7 @@ fourletterphat==0.0.2
 gpiozero==1.3.2
 gyp==0.1
 html5lib==0.999
+idlex==1.13
 itsdangerous==0.24
 keyboard==0.11.0
 lxkeymap==0.1

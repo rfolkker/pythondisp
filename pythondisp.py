@@ -26,8 +26,6 @@ class set_text(Resource):
         print("Testing: " + lines[0])
         lines[offset] = text
         print("Text: " + lines[offset])
-        # papirus_text.UpdateText(ids[offset],lines[offset])
-
         return jsonify({'data': lines})
 
 
@@ -37,7 +35,6 @@ class clear_text(Resource):
         offset = int(index) - 1
         print("offset: {}".format(offset))
         lines[offset] = ""
-        # papirus_text.AddText(ids[offset],lines[offset])
         return jsonify({'data': lines})
 
 class get_text(Resource):
@@ -47,7 +44,7 @@ class get_text(Resource):
 
 class commit_text(Resource):
     def get(self):
-        for i in range(0,8):
+        for i in range(0,9):
             papirus_text.UpdateText(ids[i], lines[i])
         papirus_text.WriteAll()
         return jsonify({'data':lines})
@@ -65,7 +62,7 @@ def index():
     return render_template("index.html")
 
 if __name__ == '__main__':
-    for i in range(0, 8):
+    for i in range(0, 9):
         papirus_text.AddText(lines[i], 0, i*14, Id=ids[i], size=12)
     papirus_text.WriteAll()
-    app.run(host='0.0.0.0', port=5554)
+    app.run(host='0.0.0.0', port=5555)
